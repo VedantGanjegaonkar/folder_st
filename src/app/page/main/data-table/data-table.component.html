@@ -1,0 +1,20 @@
+<p>data-table works!</p>
+
+
+<table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <!-- Add other headers as necessary -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.userName }}</td>
+        <td>{{ user.email }}</td>
+        <!-- Add other fields as necessary -->
+      </tr>
+    </tbody>
+  </table>
+  
