@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { createUser, updateUser, deleteUser} from '../services/user.service';
 import { log } from 'console';
+import{errorHandler} from "../middleware/errorHandler"
 
 const createUserController = async (req: Request, res: Response) => {
   try {

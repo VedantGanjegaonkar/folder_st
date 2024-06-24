@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'backend/src/models/user.model';
+import { UserService} from 'src/app/data.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +13,7 @@ export class SignupComponent {
    registrationForm!: FormGroup;
   roles: string[] = ['admin', 'user'];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private dataService:UserService) { }
 
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
@@ -38,7 +40,16 @@ export class SignupComponent {
   onSubmit() {
     if (this.registrationForm.valid) {
       console.log(this.registrationForm.value);
-      // You can perform further actions like sending data to the server here
+
+      this.dataService.register(this.registrationForm.value).subscribe(
+        response => {
+          console.log('User registered successfully!', response);
+          window.location.reload(); // Consider using more Angular-friendly ways to refresh the data.
+        },
+        error => {
+          console.error('Error registering  user!', error);
+        }
+      )
     }
   }
 
